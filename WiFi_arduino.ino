@@ -5,12 +5,12 @@ const char *ssid = "KNUET-Gast";
 const char *password = "Knuet201";
 WiFiClient espClient;
 
-const char *mqttBrocker = "broker.emqx.io";
-const char *topic = "esp32/test";
-const char *mqttUsername = "emqx";
-const char *mqttPassword = "public";
-const int mqttPort = 1883;
-PubSubClient client(espClient);
+  const char *mqttBroker = "139.13.210.83";
+  const char *topic = "esp32/jade";
+  const char *mqttUsername = "";
+  const char *mqttPassword = "";
+  const int mqttPort = 1883;
+  PubSubClient client(espClient);
   
 void setup() {
 
@@ -22,8 +22,7 @@ void setup() {
     Serial.println(ssid);
   }
   Serial.println("Connection done.");
-  // mqtt
-  client.setServer(mqttBrocker, mqttPort);
+  client.setServer(mqttBroker, mqttPort);
   client.setCallback(callback);
   while(!client.connected()){
     String clientID = "esp32-basakerkek-";
@@ -44,8 +43,6 @@ void setup() {
 void loop() {
   client.loop();
 }
-
-
 void callback(char *topic, byte *payload, unsigned int length){
   Serial.print ("Message recieved in topic: ");
   Serial.println(topic);
